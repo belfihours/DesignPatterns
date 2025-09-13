@@ -1,6 +1,7 @@
-package Creational.Factory;
+package creational.factoryMethod;
 
-public class Brush implements ITool{
+public class Pencil implements Tool {
+
     @Override
     public void render() {
 

@@ -1,4 +1,4 @@
-package Creational.Factory;
+package creational.factoryMethod;
 
 public abstract class ToolFactory {
     public void renderTools(){
@@ -6,5 +6,5 @@ public abstract class ToolFactory {
         tool.render();
     }
 
-    public abstract ITool createTool();
+    public abstract Tool createTool();
 }

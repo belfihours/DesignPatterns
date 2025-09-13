@@ -1,8 +1,8 @@
-package Creational.Factory;
+package creational.factoryMethod;
 
 public class PencilFactory extends ToolFactory{
     @Override
-    public ITool createTool() {
+    public Tool createTool() {
         return new Pencil();
     }
 }
