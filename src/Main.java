@@ -16,6 +16,7 @@ import structural.adapter.SquarePieceAdapter;
 import structural.adapter.domain.RoundHole;
 import structural.adapter.domain.RoundPiece;
 import structural.adapter.domain.SquarePiece;
+import structural.decorator.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -83,6 +84,23 @@ public class Main {
 
         System.out.println("Small square piece fits in hole: " + roundHole.fits(smallSquareAdapter));
         System.out.println("Big square fits in hole: " + roundHole.fits(bigSquareAdapter));
+
+        // Decorator
+
+        String salaryRecords = "Name,Salary\nJohn Smith,100000\nSteven Jobs,912000";
+        DataSourceDecorator encoded =
+                new CompressionDecorator(
+                    new EncryptionDecorator(
+                        new FileDataSource("out/OutputDemo.txt")));
+        encoded.writeData(salaryRecords);
+        DataSource plain = new FileDataSource("out/OutputDemo.txt");
+
+        System.out.println("- Input ----------------");
+        System.out.println(salaryRecords);
+        System.out.println("- Encoded --------------");
+        System.out.println(plain.readData());
+        System.out.println("- Decoded --------------");
+        System.out.println(encoded.readData());
 
         //endregion
 
