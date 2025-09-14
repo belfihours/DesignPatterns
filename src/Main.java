@@ -12,6 +12,10 @@ import creational.factoryMethod.BrushFactory;
 import creational.factoryMethod.PencilFactory;
 import creational.factoryMethod.ToolFactory;
 import creational.SingletonDB;
+import structural.adapter.SquarePieceAdapter;
+import structural.adapter.domain.RoundHole;
+import structural.adapter.domain.RoundPiece;
+import structural.adapter.domain.SquarePiece;
 
 public class Main {
     public static void main(String[] args) {
@@ -59,6 +63,26 @@ public class Main {
 
         System.out.println(car1);
         System.out.println(car2);
+
+        //endregion
+
+        //region Structural
+
+        // Adapter
+        var roundHole = new RoundHole(5);
+        var roundPiece = new RoundPiece(4);
+
+        System.out.println("Round piece fits in hole: " + roundHole.fits(roundPiece));
+
+        var smallSquarePiece = new SquarePiece(3);
+        var bigSquarePiece = new SquarePiece(15);
+        // roundHole.fits(smallSquarePiece); error
+
+        var smallSquareAdapter = new SquarePieceAdapter(smallSquarePiece);
+        var bigSquareAdapter = new SquarePieceAdapter(bigSquarePiece);
+
+        System.out.println("Small square piece fits in hole: " + roundHole.fits(smallSquareAdapter));
+        System.out.println("Big square fits in hole: " + roundHole.fits(bigSquareAdapter));
 
         //endregion
 
