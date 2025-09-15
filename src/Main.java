@@ -17,6 +17,7 @@ import structural.adapter.domain.RoundHole;
 import structural.adapter.domain.RoundPiece;
 import structural.adapter.domain.SquarePiece;
 import structural.decorator.*;
+import structural.facade.VideoConversionFacade;
 
 public class Main {
     public static void main(String[] args) {
@@ -102,7 +103,12 @@ public class Main {
         System.out.println("- Decoded --------------");
         System.out.println(encoded.readData());
 
+        // Facade
+        var videoConverterFacade = new VideoConversionFacade();
+        var converted = videoConverterFacade.conertVideo("test_video.ogg", "mp4");
+
         //endregion
+
 
     }
 }
