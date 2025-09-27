@@ -1,3 +1,7 @@
+import behavioral.observer.EmailListener;
+import behavioral.observer.EventType;
+import behavioral.observer.LoggingListener;
+import behavioral.observer.PublisherEditor;
 import creational.abstractFactory.interfaces.Button;
 import creational.abstractFactory.interfaces.Checkbox;
 import creational.abstractFactory.interfaces.GUIFactory;
@@ -109,6 +113,17 @@ public class Main {
 
         //endregion
 
+        //region Behavioral
 
+        // Observer
+        LoggingListener loggingListener = new LoggingListener();
+        EmailListener emailListener = new EmailListener();
+        PublisherEditor editor = new PublisherEditor();
+        editor.events.subscribe(EventType.open, loggingListener);
+        editor.events.subscribe(EventType.write, emailListener);
+        editor.open("test_video.ogg");
+        editor.writeFile();
+
+        //endregion
     }
 }
