@@ -1,4 +1,4 @@
-﻿package behavioral.strategy;
+package behavioral.strategy;
 
 public class StrategySubtract implements Strategy{
     @Override
