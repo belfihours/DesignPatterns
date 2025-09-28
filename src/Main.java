@@ -2,6 +2,7 @@ import behavioral.observer.EmailListener;
 import behavioral.observer.EventType;
 import behavioral.observer.LoggingListener;
 import behavioral.observer.PublisherEditor;
+import behavioral.strategy.*;
 import creational.abstractFactory.interfaces.Button;
 import creational.abstractFactory.interfaces.Checkbox;
 import creational.abstractFactory.interfaces.GUIFactory;
@@ -31,11 +32,11 @@ public class Main {
         // Singleton
         SingletonDB db1 = SingletonDB.getInstance();
         SingletonDB db2 = SingletonDB.getInstance();
-        System.out.println(db1.getSeq()==db2.getSeq()); //should be true
+        System.out.println(db1.getSeq() == db2.getSeq()); //should be true
 
         // Factory Method
         ToolFactory factory;
-        if (args.length>0 && args[0].equals("Pencil")) {
+        if (args.length > 0 && args[0].equals("Pencil")) {
             factory = new PencilFactory();
         } else {
             factory = new BrushFactory();
@@ -95,8 +96,8 @@ public class Main {
         String salaryRecords = "Name,Salary\nJohn Smith,100000\nSteven Jobs,912000";
         DataSourceDecorator encoded =
                 new CompressionDecorator(
-                    new EncryptionDecorator(
-                        new FileDataSource("out/OutputDemo.txt")));
+                        new EncryptionDecorator(
+                                new FileDataSource("out/OutputDemo.txt")));
         encoded.writeData(salaryRecords);
         DataSource plain = new FileDataSource("out/OutputDemo.txt");
 
@@ -124,6 +125,18 @@ public class Main {
         editor.open("test_video.ogg");
         editor.writeFile();
 
+        // Strategy
+        var operation = "add";
+        Strategy strategy = switch (operation) {
+            case "add" -> new StrategyAdd();
+            case "subtract" -> new StrategySubtract();
+            case "multiply" -> new StrategyMultiply();
+            default -> throw new UnsupportedOperationException();
+        };
+        var context = new Context();
+        context.setStrategy(strategy);
+        System.out.println("Strategy result: " + strategy.execute(2,5));
+
         //endregion
+        }
     }
-}
