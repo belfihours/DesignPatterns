@@ -1,3 +1,4 @@
+import behavioral.command.Editor;
 import behavioral.observer.EmailListener;
 import behavioral.observer.EventType;
 import behavioral.observer.LoggingListener;
@@ -136,6 +137,17 @@ public class Main {
         var context = new Context();
         context.setStrategy(strategy);
         System.out.println("Strategy result: " + strategy.execute(2,5));
+
+        // Command
+        var editorForCommand = new Editor();
+        editorForCommand.init();
+
+        // Chain of responsibility
+
+        // State
+
+        // Template Method
+
 
         //endregion
         }
