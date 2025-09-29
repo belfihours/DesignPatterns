@@ -1,3 +1,4 @@
+import behavioral.chainofresponsability.*;
 import behavioral.command.Editor;
 import behavioral.observer.EmailListener;
 import behavioral.observer.EventType;
@@ -140,9 +141,19 @@ public class Main {
 
         // Command
         var editorForCommand = new Editor();
-        editorForCommand.init();
+//        editorForCommand.init();
 
         // Chain of responsibility
+        Server server = new Server();
+        server.register("admin@example.com", "admin_pass");
+        server.register("user@example.com", "user_pass");
+        Middleware middleware = Middleware.link(
+                new ThrottlingMiddleware(2),
+                new UserExistsMiddleware(server),
+                new RoleCheckMiddleware()
+        );
+        server.setMiddleware(middleware);
+        boolean success = server.logIn("admin@example.com", "admin_pass");
 
         // State
 
